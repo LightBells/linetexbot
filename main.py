@@ -20,12 +20,8 @@ from argparse import ArgumentParser
 from flask import Flask, request, abort
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
-from linebot.models import (
-    MessageEvent,
-    TextMessage,
-    TextSendMessage,
-    ImageSendMessage
-)
+from linebot.models import (MessageEvent, TextMessage, TextSendMessage,
+                            ImageSendMessage)
 
 app = Flask(__name__)
 
@@ -69,41 +65,35 @@ def message_text(event):
     if (event.source.type == "group"):
         text = event.message.text
         if text.startswith("t:") == 0 or text.startswith("T:") == 0:
-            image_url = image_base + urllib.parse.quote("\\display " + text[2:-1])
+            image_url = image_base + urllib.parse.quote("\\display " +
+                                                        text[1:-1])
             try:
                 line_bot_api.reply_message(
                     event.reply_token,
                     ImageSendMessage(
                         original_content_url=image_url,
-                        preview_image_url=image_url
-                    )
-                )
+                        preview_image_url=image_url))
             except Exception as e:
                 except_str = traceback.format_exc()
                 try:
-                    line_bot_api.reply_message(
-                        event.reply_token,
-                        TextSendMessage(except_str)
-                    )
+                    line_bot_api.reply_message(event.reply_token,
+                                               TextSendMessage(except_str))
                 except Exception as e:
                     print(e)
     else:
         try:
-            image_url = image_base + urllib.parse.quote("\\display " + event.message.text)
+            image_url = image_base + urllib.parse.quote("\\display " +
+                                                        event.message.text)
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
                     original_content_url=image_url,
-                    preview_image_url=image_url
-                )
-            )
+                    preview_image_url=image_url))
         except Exception as e:
             except_str = traceback.format_exc()
             try:
-                line_bot_api.reply_message(
-                    event.reply_token,
-                    TextSendMessage(except_str)
-                )
+                line_bot_api.reply_message(event.reply_token,
+                                           TextSendMessage(except_str))
             except Exception as e:
                 print(e)
 
