@@ -65,7 +65,7 @@ def message_text(event):
     if (event.source.type == "group"):
         text = event.message.text
         if text.startswith("t:") == 0 or text.startswith("T:") == 0:
-            image_url = image_base + urllib.parse.quote("\\display " +
+            image_url = image_base + urllib.parse.quote("\\displaystyle " +
                                                         text[1:-1])
             try:
                 line_bot_api.reply_message(
@@ -82,7 +82,7 @@ def message_text(event):
                     print(e)
     else:
         try:
-            image_url = image_base + urllib.parse.quote("\\display " +
+            image_url = image_base + urllib.parse.quote("\\displaystyle " +
                                                         event.message.text)
             line_bot_api.reply_message(
                 event.reply_token,
