@@ -64,7 +64,7 @@ def message_text(event):
     image_base = "https://chart.apis.google.com/chart?cht=tx&chs=50&chl="
     if (event.source.type == "group" or event.source.type == "room"):
         text = event.message.text
-        if text.startswith("t:") == 0 or text.startswith("T:") == 0:
+        if text.startswith("t:") or text.startswith("T:"):
             image_url = image_base + urllib.parse.quote("\\displaystyle " +
                                                         text[1:-1])
             try:
