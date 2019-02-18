@@ -69,7 +69,7 @@ foreach($json['events'] as $e){
         }
 
         if (strpos($http_response_header[0], '200') === false) {
-            http_response_code(500);
+            http_response_code(200);
             error_log("Request failed: " . $result);
         }
     }
