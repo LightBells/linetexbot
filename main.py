@@ -61,7 +61,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
-    image_base = "https://chart.apis.google.com/chart?cht=tx&chs=50&chl="
+    image_base = "https://chart.apis.google.com/chart?cht=tx&chs=200&chl="
     if (event.source.type == "group" or event.source.type == "room"):
         text = event.message.text
         if text.startswith("t:") or text.startswith("T:"):
