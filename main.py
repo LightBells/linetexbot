@@ -66,7 +66,7 @@ def message_text(event):
         text = event.message.text
         if text.startswith("t:") or text.startswith("T:"):
             image_url = image_base + urllib.parse.quote("\\displaystyle " +
-                                                        text[1:-1])
+                                                        text[2:-1])
             try:
                 line_bot_api.reply_message(
                     event.reply_token,
